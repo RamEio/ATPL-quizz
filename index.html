@@ -1,0 +1,313 @@
+function App() {
+  const { useState, useMemo } = React;
+
+  // -------- Banque démo (fallback si aucun JSON importé) --------
+  const demoBank = useMemo(
+    () => [
+      { id: 1, question: "CTR: VFR interdit (sans autorisation) quand ?", options: ["Plafond < 1000 ft et vis < 5 km", "Plafond < 1500 ft ou vis < 5 km", "Plafond < 1500 ft et vis < 8 km", "Plafond < 1000 ft ou vis < 8 km"], correctIndex: 1, explanation: "CTR VFR: plafond < 1500 ft OU vis < 5 km.", tags: { rules: "VFR", difficulty: "easy", block: "AirLaw" } },
+      { id: 2, question: "F/G ≤1000 ft AGL: VMC ?", options: ["1500 m / 1000 ft ; 5 km", "CCISG ; 5 km", "CCISG ; 8 km", "1500 m / 1000 m ; 5 km"], correctIndex: 1, explanation: "Clear of cloud & in sight of surface; 5 km.", tags: { rules: "VFR", difficulty: "easy", block: "Ops" } },
+      { id: 3, question: "SVFR: vis mini pour commencer ?", options: ["1500 m", "3 km", "5 km", "800 m"], correctIndex: 1, explanation: "Ops: ne pas commencer < 3 km.", tags: { rules: "VFR", difficulty: "medium", block: "Ops" } },
+      { id: 4, question: "Code SSR panne radio ?", options: ["7000", "7500", "7600", "7700"], correctIndex: 2, explanation: "7600 panne ; 7700 détresse ; 7500 illicite.", tags: { rules: "Both", difficulty: "easy", block: "Comms" } },
+      { id: 5, question: "Hypoxie: vrai ?", options: ["Vision nocturne ok jusqu'à 10 000 ft", "Périphérique s'améliore d'abord", "Vision nocturne dégradée dès ~5000 ft", "Mémoire CT non affectée"], correctIndex: 2, explanation: "Vision nocturne sensible tôt.", tags: { rules: "Both", difficulty: "easy", block: "HPL" } },
+      { id: 6, question: "OCAS VFR sans ATS: code ?", options: ["A/2000", "A/7000", "A/7600", "A/0000"], correctIndex: 1, explanation: "A/7000 conspicuity.", tags: { rules: "VFR", difficulty: "easy", block: "AirLaw" } },
+      { id: 7, question: "Mot d’urgence ?", options: ["Mayday ×3", "Urgency ×3", "Pan Pan ×3", "Sécurité ×3"], correctIndex: 2, explanation: "Pan Pan ×3.", tags: { rules: "Both", difficulty: "easy", block: "Comms" } },
+      { id: 8, question: "Panne radio en VMC: faire ?", options: ["IFR + 7700", "Continuer VMC, atterrir au plus proche, signaler", "Attente à altitude de sécu", "Retour départ"], correctIndex: 1, explanation: "Procédures panne radio en VMC.", tags: { rules: "Both", difficulty: "medium", block: "Comms" } },
+      { id: 9, question: "TUC ~ 20 000 ft (activité modérée)", options: ["~30 min", "~5 min", "1–2 min", "15–20 s"], correctIndex: 1, explanation: "≈ 5 min.", tags: { rules: "Both", difficulty: "medium", block: "HPL" } },
+      { id: 10, question: "VFR F/G >1000 ft AGL: VMC ?", options: ["2000 ft / 1000 ft ; 8 km", "1500 m / 1000 ft ; 5 km", "1500 m / 1000 m ; 5 km", "CCISG ; 5 km"], correctIndex: 1, explanation: "1500 m horiz, 1000 ft vert ; 5 km.", tags: { rules: "VFR", difficulty: "medium", block: "Ops" } },
+    ],
+    []
+  );
+
+  // -------- États globaux --------
+  const [importError, setImportError] = useState("");
+  const [bank, setBank] = useState(demoBank); // banque active (JSON importé ou démo)
+
+  // Filtres de pré-lancement
+  const [rules, setRules] = useState("Both"); // "VFR" | "IFR" | "Both"
+  const [difficulty, setDifficulty] = useState("All"); // "All" | "easy" | "medium" | "hard"
+  const [block, setBlock] = useState("All"); // bloc/thème (si présent dans tags.block)
+  const [numQuestions, setNumQuestions] = useState(10);
+  const [started, setStarted] = useState(false);
+
+  // Quiz en cours
+  const [quiz, setQuiz] = useState([]);
+  const [current, setCurrent] = useState(0);
+  const [answers, setAnswers] = useState([]);
+  const [submitted, setSubmitted] = useState(false);
+
+  // -------- Import JSON --------
+  function onImportFile(e) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setImportError("");
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const data = JSON.parse(reader.result);
+        const arr = Array.isArray(data) ? data : data.questions;
+        if (!Array.isArray(arr) || arr.length === 0) throw new Error("JSON vide");
+        // normalisation légère
+        const norm = arr.map((q, i) => ({
+          id: q.id ?? i + 1,
+          question: q.question,
+          options: q.options,
+          correctIndex: q.correctIndex,
+          explanation: q.explanation ?? "",
+          tags: q.tags ?? { rules: "Both", difficulty: "medium", block: "Misc" },
+        })).filter(q => q && q.question && Array.isArray(q.options) && q.options.length >= 2);
+        if (norm.length === 0) throw new Error("Questions invalides");
+        setBank(norm);
+        // reset filtres compatibles
+        setStarted(false);
+        setSubmitted(false);
+        setAnswers([]);
+        setQuiz([]);
+        setCurrent(0);
+      } catch (err) {
+        setImportError("Import échoué: " + (err?.message || "format JSON"));
+      }
+    };
+    reader.onerror = () => setImportError("Lecture fichier échouée");
+    reader.readAsText(file);
+  }
+
+  // -------- Dérivés --------
+  const allBlocks = useMemo(() => {
+    const s = new Set();
+    bank.forEach(q => q.tags?.block && s.add(q.tags.block));
+    return ["All", ...Array.from(s).sort()];
+  }, [bank]);
+
+  const filteredBank = useMemo(() => {
+    return bank.filter(q => {
+      const rOk = rules === "Both" || (q.tags?.rules || "Both") === rules;
+      const dOk = difficulty === "All" || (q.tags?.difficulty || "medium") === difficulty;
+      const bOk = block === "All" || (q.tags?.block || "Misc") === block;
+      return rOk && dOk && bOk;
+    });
+  }, [bank, rules, difficulty, block]);
+
+  const presets = useMemo(() => {
+    const p = [5, 10, 20, 40];
+    const max = filteredBank.length;
+    const allowed = p.filter(n => n <= max);
+    return allowed.length ? allowed : max > 0 ? [max] : [0];
+  }, [filteredBank.length]);
+
+  const estimatedMinutes = numQuestions; // ~1 min / question
+
+  // -------- Lancement --------
+  function startQuiz() {
+    const pool = [...filteredBank];
+    if (pool.length === 0) return;
+    const shuffled = pool.sort(() => Math.random() - 0.5);
+    const selected = shuffled.slice(0, Math.min(numQuestions, pool.length));
+    setQuiz(selected);
+    setAnswers(Array(selected.length).fill(null));
+    setCurrent(0);
+    setSubmitted(false);
+    setStarted(true);
+  }
+
+  const progress = quiz.length ? ((current + 1) / quiz.length) * 100 : 0;
+
+  // -------- Handlers quiz --------
+  function selectOption(qIndex, optIndex) {
+    if (submitted) return;
+    const next = [...answers];
+    next[qIndex] = optIndex;
+    setAnswers(next);
+  }
+
+  function nextQ() { setCurrent(c => Math.min(c + 1, quiz.length - 1)); }
+  function prevQ() { setCurrent(c => Math.max(c - 1, 0)); }
+  function submit() { setSubmitted(true); window.scrollTo({ top: 0, behavior: "smooth" }); }
+  function resetToHome() {
+    setStarted(false); setSubmitted(false); setCurrent(0); setAnswers([]); setQuiz([]);
+  }
+
+  const score = useMemo(() => submitted ? answers.reduce((a, ans, i) => a + (ans === quiz[i].correctIndex ? 1 : 0), 0) : 0, [submitted, answers, quiz]);
+
+  // -------- UI --------
+  return (
+    <div className="min-h-screen bg-gray-50 text-gray-900">
+      <header className="bg-indigo-600 text-white py-4 shadow">
+        <div className="max-w-5xl mx-auto px-4 flex items-center justify-between">
+          <h1 className="text-xl font-semibold">Quiz ATPL — Préparation</h1>
+          <div className="text-sm opacity-90">
+            {started ? `${quiz.length} q` : `${filteredBank.length} dispo`}
+          </div>
+        </div>
+      </header>
+
+      <main className="max-w-5xl mx-auto px-4 py-6">
+        {!started ? (
+          <div className="bg-white rounded-lg shadow p-4 sm:p-6 space-y-4">
+            <div className="flex flex-col sm:flex-row gap-4 sm:items-end">
+              <div className="flex-1">
+                <label className="block text-sm text-gray-600 mb-1">Importer JSON</label>
+                <input type="file" accept="application/json" onChange={onImportFile} className="block w-full text-sm" />
+                {importError && <div className="mt-1 text-sm text-red-600">{importError}</div>}
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label className="block text-sm text-gray-600 mb-1">Règles</label>
+                <div className="flex gap-2">
+                  {(["VFR","IFR","Both"]).map(v => (
+                    <button key={v} onClick={() => setRules(v)}
+                      className={`px-3 py-1.5 rounded-full border text-sm ${rules===v?"bg-indigo-600 text-white border-indigo-600":"bg-white text-gray-800 border-gray-300 hover:bg-gray-50"}`}>
+                      {v}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm text-gray-600 mb-1">Difficulté</label>
+                <div className="flex gap-2 flex-wrap">
+                  {(["All","easy","medium","hard"]).map(v => (
+                    <button key={v} onClick={() => setDifficulty(v)}
+                      className={`px-3 py-1.5 rounded-full border text-sm ${difficulty===v?"bg-indigo-600 text-white border-indigo-600":"bg-white text-gray-800 border-gray-300 hover:bg-gray-50"}`}>
+                      {v}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm text-gray-600 mb-1">Bloc/Thème</label>
+                <select value={block} onChange={e=>setBlock(e.target.value)} className="w-full border rounded px-3 py-2 text-sm">
+                  {allBlocks.map(b => <option key={b} value={b}>{b}</option>)}
+                </select>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-gray-600">Nombre de questions</span>
+                <div className="flex gap-2">
+                  {presets.map(n => (
+                    <button key={n} onClick={()=>setNumQuestions(n)}
+                      className={`px-3 py-1.5 rounded-full border text-sm ${numQuestions===n?"bg-indigo-600 text-white border-indigo-600":"bg-white text-gray-800 border-gray-300 hover:bg-gray-50"}`}
+                      disabled={n===0}>
+                      {n}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="text-sm text-gray-600">Estimation: ~{numQuestions} min</div>
+            </div>
+
+            <div className="flex items-center justify-between">
+              <div className="text-sm text-gray-500">Banque filtrée: {filteredBank.length} questions</div>
+              <button onClick={startQuiz} disabled={filteredBank.length===0}
+                className="px-4 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-700 disabled:opacity-50">
+                Démarrer
+              </button>
+            </div>
+          </div>
+        ) : !submitted ? (
+          <div className="bg-white rounded-lg shadow p-4 sm:p-6">
+            <div className="mb-4">
+              <div className="h-2 bg-gray-200 rounded">
+                <div className="h-2 bg-indigo-500 rounded transition-all" style={{ width: `${progress}%` }} />
+              </div>
+              <div className="mt-2 text-sm text-gray-600 flex items-center justify-between">
+                <span>Question {current + 1} / {quiz.length}</span>
+                <span className="text-gray-500">~{quiz.length} min</span>
+              </div>
+            </div>
+
+            <QuestionCard data={quiz[current]} selected={answers[current]} onSelect={(opt)=>selectOption(current, opt)} />
+
+            <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-between">
+              <div className="flex gap-3">
+                <button className={`px-4 py-2 rounded border ${current===0?"border-gray-300 text-gray-400 cursor-not-allowed":"border-gray-300 hover:bg-gray-50"}`} onClick={prevQ} disabled={current===0}>← Précédent</button>
+                <button className={`px-4 py-2 rounded border ${current===quiz.length-1?"border-gray-300 text-gray-400 cursor-not-allowed":"border-gray-300 hover:bg-gray-50"}`} onClick={nextQ} disabled={current===quiz.length-1}>Suivant →</button>
+              </div>
+              <div className="flex gap-3">
+                <button onClick={resetToHome} className="px-4 py-2 rounded border border-gray-300 hover:bg-gray-50">Quitter</button>
+                <button onClick={submit} className="px-5 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-700 disabled:opacity-60" disabled={answers.some(a=>a===null)}>
+                  Valider
+                </button>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <ResultsView questions={quiz} answers={answers} score={score} onRetry={resetToHome} />
+        )}
+      </main>
+
+      <footer className="max-w-5xl mx-auto px-4 pb-8 text-xs text-gray-500">Sources: CAE ATPL (Air Law, Ops, Comms, HPL).</footer>
+    </div>
+  );
+}
+
+function QuestionCard({ data, selected, onSelect }) {
+  if (!data) return null;
+  return (
+    <div>
+      <h2 className="text-lg sm:text-xl font-semibold mb-4">{data.question}</h2>
+      <div className="grid gap-3">
+        {data.options.map((opt, idx) => {
+          const active = selected === idx;
+          return (
+            <button key={idx} onClick={() => onSelect(idx)}
+              className={`text-left rounded border p-3 transition ${active?"border-indigo-600 bg-indigo-50":"border-gray-300 hover:bg-gray-50"}`}>
+              <span className="font-medium mr-2">{String.fromCharCode(97 + idx)})</span>
+              {opt}
+            </button>
+          );
+        })}
+      </div>
+      {data.tags && (
+        <div className="mt-3 text-xs text-gray-500">{data.tags.rules} • {data.tags.difficulty} • {data.tags.block}</div>
+      )}
+    </div>
+  );
+}
+
+function ResultsView({ questions, answers, score, onRetry }) {
+  const total = questions.length;
+  const percent = Math.round((score / total) * 100);
+  let badgeColor = "bg-yellow-100 text-yellow-800";
+  if (percent >= 80) badgeColor = "bg-green-100 text-green-800";
+  else if (percent < 50) badgeColor = "bg-red-100 text-red-800";
+
+  return (
+    <div className="bg-white rounded-lg shadow p-4 sm:p-6">
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-xl font-semibold">Résultats</h2>
+        <span className={`text-sm px-3 py-1 rounded ${badgeColor}`}>{score} / {total} ({percent}%)</span>
+      </div>
+      <ol className="space-y-4 list-decimal list-inside">
+        {questions.map((q, i) => {
+          const correct = q.correctIndex;
+          const user = answers[i];
+          const isCorrect = user === correct;
+          return (
+            <li key={q.id} className="bg-gray-50 rounded p-3">
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <div className="font-medium mb-1">{q.question}</div>
+                  <div className="text-sm">Ta réponse: {user != null ? labelFor(user, q.options[user]) : "—"}</div>
+                  <div className="text-sm">Bonne réponse: {labelFor(correct, q.options[correct])}</div>
+                  {q.explanation && <div className="mt-2 text-sm text-gray-700">Explication: {q.explanation}</div>}
+                </div>
+                <span className={`text-xs px-2 py-1 rounded self-start ${isCorrect?"bg-green-100 text-green-800":"bg-red-100 text-red-800"}`}>{isCorrect?"Correct":"Incorrect"}</span>
+              </div>
+            </li>
+          );
+        })}
+      </ol>
+      <div className="mt-6 flex gap-3 justify-between">
+        <button onClick={onRetry} className="px-4 py-2 rounded border border-gray-300 hover:bg-gray-50">Nouveau quiz</button>
+        <button onClick={()=>window.scrollTo({top:0,behavior:'smooth'})} className="px-4 py-2 rounded border border-gray-300 hover:bg-gray-50">Haut de page</button>
+      </div>
+    </div>
+  );
+}
+
+function labelFor(idx, text) { return `${String.fromCharCode(97 + idx)}) ${text}`; }

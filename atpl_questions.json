@@ -1,0 +1,1747 @@
+{
+  "themes": {
+    "010 Air Law": {
+      "name": "010 Droit Aérien",
+      "description": "Réglementation, espaces aériens, règles de l'air",
+      "questions": []
+    },
+    "020 Airframe and Systems": {
+      "name": "020 Cellule et Systèmes",
+      "description": "Structure, hydraulique, conditionnement, trains, etc.",
+      "questions": []
+    },
+    "020 Powerplant": {
+      "name": "020 Groupe Motopropulseur",
+      "description": "Moteurs à pistons et à turbine, hélices",
+      "questions": []
+    },
+    "020 Instrumentation": {
+      "name": "020 Instrumentation",
+      "description": "Instruments de vol et moteurs, affichages",
+      "questions": []
+    },
+    "020 Electrics and Electronics": {
+      "name": "020 Electricité et Electronique",
+      "description": "Production, distribution, composants, avionique de base",
+      "questions": []
+    },
+    "030 Flight Planning and Monitoring": {
+      "name": "030 Préparation et Suivi du Vol",
+      "description": "Plan de vol, carburant, ETOPS, alternates",
+      "questions": []
+    },
+    "030 Mass and Balance / Performance": {
+      "name": "030/031/032 Masse, Centrage et Performances",
+      "description": "Masse et centrage, perfo avions légers et lourds",
+      "questions": []
+    },
+    "040 Human Performance and Limitations": {
+      "name": "040 Facteurs Humains",
+      "description": "Physiologie, psychologie, limitations humaines",
+      "questions": []
+    },
+    "050 Meteorology": {
+      "name": "050 Météorologie",
+      "description": "Atmosphère, synoptique, dangers météo, messages",
+      "questions": [
+        {
+          "id": "met-001",
+          "question": "Dans l'atmosphère standard (ISA), le gradient thermique moyen dans la troposphère est de :",
+          "options": [
+            "-1.5°C/1000 ft",
+            "-2°C/1000 ft",
+            "-3°C/1000 ft",
+            "-0.65°C/100 m"
+          ],
+          "correctIndex": 3,
+          "explanation": "ISA: -6.5°C/km ≈ -2°C/1000 ft; -0.65°C/100 m est l'équivalent en unités SI.",
+          "difficulty": 1,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-002",
+          "question": "La tropopause en moyenne latitude se situe typiquement vers :",
+          "options": [
+            "FL150",
+            "FL250-350",
+            "FL450-550",
+            "FL070"
+          ],
+          "correctIndex": 1,
+          "explanation": "Aux moyennes latitudes, tropopause ≈ FL300 ±; plus basse en hiver, plus élevée en été/tropiques.",
+          "difficulty": 2,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-003",
+          "question": "En air standard au niveau de la mer, la pression est :",
+          "options": [
+            "1013 hPa",
+            "1013.25 hPa",
+            "1000 hPa",
+            "29.00 inHg"
+          ],
+          "correctIndex": 1,
+          "explanation": "ISA MSLP = 1013.25 hPa (29.92 inHg).",
+          "difficulty": 1,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-004",
+          "question": "QNH correspond à :",
+          "options": [
+            "Pression réduite au niveau moyen de la mer (MSL)",
+            "Pression au seuil de piste",
+            "Pression standard 1013 hPa",
+            "Pression à l'altitude de transition"
+          ],
+          "correctIndex": 0,
+          "explanation": "QNH = pression ramenée au niveau de la mer; QFE = pression au seuil; 1013 = QNE.",
+          "difficulty": 1,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-005",
+          "question": "Par température plus froide que l'ISA, un altimètre calé au QNH :",
+          "options": [
+            "surestime l'altitude",
+            "sous-estime l'altitude",
+            "reste exact",
+            "indique l'altitude vraie"
+          ],
+          "correctIndex": 0,
+          "explanation": "Froid: 'From high to low look out below' — l'altimètre surestime, l'avion est plus bas que l'indiqué.",
+          "difficulty": 2,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-006",
+          "question": "Le passage du QNH au 1013 hPa s'effectue :",
+          "options": [
+            "À l'altitude de transition",
+            "Au niveau de transition",
+            "À la hauteur de transition",
+            "Au FL100"
+          ],
+          "correctIndex": 0,
+          "explanation": "En montée: à l'altitude de transition on règle 1013; en descente: au niveau de transition on repasse au QNH.",
+          "difficulty": 2,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-007",
+          "question": "Une baisse rapide de pression en vol de croisière (QNH constant réglé) provoque :",
+          "options": [
+            "Une indication d'altitude en hausse",
+            "Une indication d'altitude en baisse",
+            "Aucun effet",
+            "Un changement de V/S uniquement"
+          ],
+          "correctIndex": 1,
+          "explanation": "Baisse de pression -> altimètre indique plus bas; en réalité vous êtes plus haut que l'indication.",
+          "difficulty": 2,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-008",
+          "question": "La température potentielle est :",
+          "options": [
+            "La température qu'aurait une parcelle ramenée adiabatiquement à 1000 hPa",
+            "La température ressentie par l'observateur",
+            "La température mesurée par sonde TAT",
+            "La température au point de rosée"
+          ],
+          "correctIndex": 0,
+          "explanation": "Définition standard de θ (température potentielle).",
+          "difficulty": 3,
+          "flightRules": [
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-009",
+          "question": "Le point de rosée est :",
+          "options": [
+            "La température à laquelle l'air devient saturé en refroidissant",
+            "La température du sol avant l'aube",
+            "La température potentielle équivalente",
+            "La température virtuelle"
+          ],
+          "correctIndex": 0,
+          "explanation": "Tdew = temp. à saturation par refroidissement à pression constante.",
+          "difficulty": 1,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-010",
+          "question": "Des nuages cumuliformes indiquent généralement :",
+          "options": [
+            "Instabilité",
+            "Stabilité",
+            "Subsidence forte",
+            "Inversion marquée"
+          ],
+          "correctIndex": 0,
+          "explanation": "Développement vertical ⇒ instabilité.",
+          "difficulty": 1,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-011",
+          "question": "Les altostratus sont typiquement associés à :",
+          "options": [
+            "Front chaud",
+            "Front froid",
+            "Air convectif d'été",
+            "Orographie"
+          ],
+          "correctIndex": 0,
+          "explanation": "AS/NS souvent en lien avec front chaud et précipitations continues.",
+          "difficulty": 1,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-012",
+          "question": "Les CB (cumulonimbus) peuvent produire :",
+          "options": [
+            "Givrage, grêle, foudre, rafales descendantes",
+            "Seulement de la bruine",
+            "Uniquement du neige faible",
+            "Aucun cisaillement"
+          ],
+          "correctIndex": 0,
+          "explanation": "CB = phénomènes dangereux multiples.",
+          "difficulty": 1,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-013",
+          "question": "Une inversion près du sol implique souvent :",
+          "options": [
+            "Brouillard/brume et mauvaise dispersion des polluants",
+            "Convection forte",
+            "Nuages convectifs élevés",
+            "Visibilité excellente"
+          ],
+          "correctIndex": 0,
+          "explanation": "Inversion bloque les mouvements verticaux => stagnation.",
+          "difficulty": 1,
+          "flightRules": [
+            "vfr"
+          ]
+        },
+        {
+          "id": "met-014",
+          "question": "L'indice de soulèvement (Lifted Index) négatif suggère :",
+          "options": [
+            "Instabilité convective",
+            "Stabilité forte",
+            "Orographie marquée",
+            "Air très sec"
+          ],
+          "correctIndex": 0,
+          "explanation": "LI<0 => air soulevé plus chaud que l'environnement ⇒ instable.",
+          "difficulty": 3,
+          "flightRules": [
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-015",
+          "question": "Un front chaud se caractérise par :",
+          "options": [
+            "Pente douce, nuages stratifiés et précipitations continues",
+            "Pente raide et grains",
+            "Pas de précipitations",
+            "Orages isolés uniquement"
+          ],
+          "correctIndex": 0,
+          "explanation": "Front chaud: AS/NS, pluie continue, visibilité réduite.",
+          "difficulty": 1,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-016",
+          "question": "Un front froid rapide produit souvent :",
+          "options": [
+            "Convection, grains, rafales",
+            "Bruine continue",
+            "Pas de précipitations",
+            "Stratus uniquement"
+          ],
+          "correctIndex": 0,
+          "explanation": "Pente raide, activité convective marquée.",
+          "difficulty": 1,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-017",
+          "question": "Une occlusion froide se produit lorsque :",
+          "options": [
+            "L'air derrière le front froid est plus froid que l'air devant le front chaud",
+            "L'air derrière le front chaud est plus froid",
+            "Les fronts se dissipent",
+            "La dépression comble"
+          ],
+          "correctIndex": 0,
+          "explanation": "Typologie des occlusions: froide/chaude selon masses d'air.",
+          "difficulty": 2,
+          "flightRules": [
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-018",
+          "question": "Le brouillard radiatif est favorisé par :",
+          "options": [
+            "Nuit claire, vents faibles, humidité élevée",
+            "Ciel couvert, vents forts",
+            "Air très sec",
+            "Pluie convective"
+          ],
+          "correctIndex": 0,
+          "explanation": "Refroidissement nocturne au sol avec vent faible.",
+          "difficulty": 1,
+          "flightRules": [
+            "vfr"
+          ]
+        },
+        {
+          "id": "met-019",
+          "question": "La brume (HZ) est due principalement à :",
+          "options": [
+            "Particules sèches en suspension",
+            "Gouttelettes d'eau",
+            "Cristaux de glace",
+            "Cendres volcaniques uniquement"
+          ],
+          "correctIndex": 0,
+          "explanation": "HZ = particules sèches; BR = brouillard léger (gouttelettes).",
+          "difficulty": 2,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-020",
+          "question": "En VFR, une visibilité < 1500 m en espace contrôlé implique :",
+          "options": [
+            "Interdiction du décollage sans SVFR/IFR",
+            "Aucun impact",
+            "VFR autorisé de jour uniquement",
+            "VFR nuit autorisé"
+          ],
+          "correctIndex": 0,
+          "explanation": "Minima VMC/SVFR s'appliquent; VFR standard non permis.",
+          "difficulty": 2,
+          "flightRules": [
+            "vfr"
+          ]
+        },
+        {
+          "id": "met-021",
+          "question": "Les rafales descendantes (microburst) entraînent en approche :",
+          "options": [
+            "D'abord une augmentation de vitesse, puis une forte diminution",
+            "Uniquement une diminution constante de vitesse",
+            "Pas d'effet significatif",
+            "Uniquement un cisaillement latéral"
+          ],
+          "correctIndex": 0,
+          "explanation": "Signature typique: gain, puis perte brutale ⇒ danger majeur.",
+          "difficulty": 2,
+          "flightRules": [
+            "ifr",
+            "vfr"
+          ]
+        },
+        {
+          "id": "met-022",
+          "question": "Un cumulonimbus calvus évolue vers :",
+          "options": [
+            "CB capillatus puis incus",
+            "Stratus fractus",
+            "Altostratus",
+            "Cirrus"
+          ],
+          "correctIndex": 0,
+          "explanation": "Cycle d'évolution CB: calvus → capillatus → incus.",
+          "difficulty": 2,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-023",
+          "question": "Le meilleur évitement CB en route IFR est :",
+          "options": [
+            "Détourner largement (≥ 20 NM) du côté sous le vent",
+            "Traverser rapidement en montée",
+            "Voler directement sous la base",
+            "Passer au-dessus sans marge verticale"
+          ],
+          "correctIndex": 0,
+          "explanation": "Ecart latéral ≥ 20 NM; éviter le côté sous le vent (turb/ondes).",
+          "difficulty": 2,
+          "flightRules": [
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-024",
+          "question": "Le givre transparent (glaze) se forme surtout :",
+          "options": [
+            "Entre 0 et -10°C dans grosses gouttes surfondues",
+            "Sous -20°C uniquement",
+            "Au sol par rayonnement",
+            "En air totalement sec"
+          ],
+          "correctIndex": 0,
+          "explanation": "Gouttes surfondues impactent et s'étalent, givre adhérent dangereux.",
+          "difficulty": 2,
+          "flightRules": [
+            "ifr",
+            "vfr"
+          ]
+        },
+        {
+          "id": "met-025",
+          "question": "Le givrage carburateur est le plus probable :",
+          "options": [
+            "À humidité élevée et températures modérées (0–+20°C)",
+            "En air très froid sec",
+            "Uniquement sous la pluie verglaçante",
+            "Uniquement en IMC"
+          ],
+          "correctIndex": 0,
+          "explanation": "Refroidissement adiabatique + évaporation ⇒ givre carbu par T modérées et humidité.",
+          "difficulty": 1,
+          "flightRules": [
+            "vfr"
+          ]
+        },
+        {
+          "id": "met-026",
+          "question": "Le givrage mixte combine :",
+          "options": [
+            "Givre blanc et givre transparent",
+            "Givre blanc et neige collante",
+            "Givre transparent et givre noir",
+            "Ne concerne que les hélices"
+          ],
+          "correctIndex": 0,
+          "explanation": "Mixte = caractéristiques des deux types, courant dans -10 à -20°C.",
+          "difficulty": 2,
+          "flightRules": [
+            "ifr",
+            "vfr"
+          ]
+        },
+        {
+          "id": "met-027",
+          "question": "La turbulence mécanique est liée à :",
+          "options": [
+            "Cisaillement près du sol dû au relief/obstacles",
+            "Cisaillement thermique en altitude",
+            "Jet stream uniquement",
+            "Orages uniquement"
+          ],
+          "correctIndex": 0,
+          "explanation": "Frottement et obstacles => tourbillons, cisaillement près du sol.",
+          "difficulty": 1,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-028",
+          "question": "Les ondes orographiques se forment :",
+          "options": [
+            "Sous vent fort perpendiculaire à une chaîne montagneuse stable",
+            "Sous vent faible parallèle",
+            "Uniquement avec convection forte",
+            "Uniquement de nuit"
+          ],
+          "correctIndex": 0,
+          "explanation": "Relief + stabilité + vent fort perpendiculaire ⇒ onde de relief.",
+          "difficulty": 2,
+          "flightRules": [
+            "ifr",
+            "vfr"
+          ]
+        },
+        {
+          "id": "met-029",
+          "question": "Les lenticulaires (Ac len, As len) indiquent :",
+          "options": [
+            "Onde de relief stable et vents forts en altitude",
+            "CB imminents",
+            "Front froid au sol",
+            "Visibilité réduite"
+          ],
+          "correctIndex": 0,
+          "explanation": "Nuages stationnaires en crête d'onde.",
+          "difficulty": 2,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-030",
+          "question": "Un courant-jet de latitude moyenne souffle :",
+          "options": [
+            "D'ouest vers l'est",
+            "D'est vers l'ouest",
+            "Nord–Sud",
+            "Variable selon l'heure"
+          ],
+          "correctIndex": 0,
+          "explanation": "Westerlies en altitude aux moyennes latitudes.",
+          "difficulty": 1,
+          "flightRules": [
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-031",
+          "question": "Le gradient horizontal de vent fort près du jet induit :",
+          "options": [
+            "Cisaillement et turbulence claire (CAT)",
+            "Givrage fort",
+            "Brouillard radiatif",
+            "Convection profonde"
+          ],
+          "correctIndex": 0,
+          "explanation": "Shear en bordure de jet ⇒ CAT.",
+          "difficulty": 2,
+          "flightRules": [
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-032",
+          "question": "Voler avec jet arrière en croisière entraîne :",
+          "options": [
+            "Réduction du temps de vol et de la consommation",
+            "Augmentation du temps de vol",
+            "Aucun effet",
+            "Toujours de la turbulence"
+          ],
+          "correctIndex": 0,
+          "explanation": "Composante arrière ⇒ gain de temps et carburant.",
+          "difficulty": 1,
+          "flightRules": [
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-033",
+          "question": "METAR: 'TEMPO' dans un TAF signifie :",
+          "options": [
+            "Fluctuations temporaires attendues",
+            "Tendance permanente",
+            "Conditions probables à l'heure exacte",
+            "Amélioration garantie"
+          ],
+          "correctIndex": 0,
+          "explanation": "TEMPO = conditions temporaires pendant l'intervalle.",
+          "difficulty": 1,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-034",
+          "question": "Dans METAR, 'NSW' signifie :",
+          "options": [
+            "No significant weather",
+            "Neige sur piste",
+            "Nord-sud wind",
+            "Nuages semi-wet"
+          ],
+          "correctIndex": 0,
+          "explanation": "NSW = pas de phénomène significatif prévu.",
+          "difficulty": 2,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-035",
+          "question": "Un SIGMET émis pour 'TS' signale :",
+          "options": [
+            "Orages significatifs en zone FIR",
+            "Neige faible locale",
+            "Brise de mer",
+            "VMC assurée"
+          ],
+          "correctIndex": 0,
+          "explanation": "SIGMET = phénomènes significatifs pour la sécurité (TS, TURB SEV, ICE SEV, etc.).",
+          "difficulty": 1,
+          "flightRules": [
+            "ifr",
+            "vfr"
+          ]
+        },
+        {
+          "id": "met-036",
+          "question": "Une carte TEMSI basse altitude montre :",
+          "options": [
+            "Zones de phénomènes significatifs sous FL100",
+            "Uniquement les vents en altitude",
+            "Uniquement la QNH régionale",
+            "Les fréquences ATC"
+          ],
+          "correctIndex": 0,
+          "explanation": "TEMSI basse altitude = phénomènes significatifs jusqu'à FL100/FL150 selon région.",
+          "difficulty": 2,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-037",
+          "question": "Sur SWC, 'ISOL CB' signifie :",
+          "options": [
+            "CB isolés (couverture < 50%)",
+            "CB nombreux (50–75%)",
+            "CB alignés sur lignes de grains",
+            "CB étendus >75%"
+          ],
+          "correctIndex": 0,
+          "explanation": "ISOL, OCNL, FRQ décrivent la couverture.",
+          "difficulty": 2,
+          "flightRules": [
+            "ifr",
+            "vfr"
+          ]
+        },
+        {
+          "id": "met-038",
+          "question": "'OCNL TSRA' sur SWC implique :",
+          "options": [
+            "Orages occasionnels avec pluie",
+            "Orages fréquents sans pluie",
+            "Pluie continue sans orage",
+            "Neige faible"
+          ],
+          "correctIndex": 0,
+          "explanation": "OCNL = occasionnel; TSRA = orage avec pluie.",
+          "difficulty": 2,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-039",
+          "question": "La composante traversière maximale est critique pour :",
+          "options": [
+            "La performance au décollage/atterrissage",
+            "La consommation en croisière",
+            "Le givrage",
+            "Les minima IFR"
+          ],
+          "correctIndex": 0,
+          "explanation": "Crosswind limits affectent le contrôle au sol/arrondi.",
+          "difficulty": 1,
+          "flightRules": [
+            "vfr"
+          ]
+        },
+        {
+          "id": "met-040",
+          "question": "La brise de mer se lève typiquement :",
+          "options": [
+            "Fin de matinée à après-midi par ciel dégagé",
+            "La nuit uniquement",
+            "Par ciel couvert et vent fort",
+            "Uniquement en hiver"
+          ],
+          "correctIndex": 0,
+          "explanation": "Différentiel thermique terre-mer.",
+          "difficulty": 1,
+          "flightRules": [
+            "vfr"
+          ]
+        },
+        {
+          "id": "met-041",
+          "question": "Le gradient de vent près du sol :",
+          "options": [
+            "Montre une augmentation de vitesse et vrille de direction avec l'altitude",
+            "Indique toujours une diminution de vitesse",
+            "Ne varie pas",
+            "Est nul par vent fort"
+          ],
+          "correctIndex": 0,
+          "explanation": "Frottement ⇒ vent plus faible et dévié près du sol.",
+          "difficulty": 2,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-042",
+          "question": "QFE calé à l'atterrissage indique :",
+          "options": [
+            "Hauteur au-dessus du seuil (≈ 0 à la piste)",
+            "Altitude AMSL",
+            "Niveau de vol",
+            "Altitude vraie"
+          ],
+          "correctIndex": 0,
+          "explanation": "QFE = pression sur terrain ⇒ altimètre ~0 sur la piste.",
+          "difficulty": 1,
+          "flightRules": [
+            "vfr"
+          ]
+        },
+        {
+          "id": "met-043",
+          "question": "En descente IFR, on repasse du 1013 au QNH :",
+          "options": [
+            "Au niveau de transition",
+            "À l'altitude de transition",
+            "Au FL100",
+            "À la hauteur de décision"
+          ],
+          "correctIndex": 0,
+          "explanation": "Descente: au niveau de transition, régler QNH.",
+          "difficulty": 2,
+          "flightRules": [
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-044",
+          "question": "En air très froid, la marge d'obstacle doit être :",
+          "options": [
+            "Augmentée (altitude vraie plus basse)",
+            "Diminuée",
+            "Inchangée",
+            "Négative"
+          ],
+          "correctIndex": 0,
+          "explanation": "Air froid ⇒ altitude vraie < altitude indiquée.",
+          "difficulty": 2,
+          "flightRules": [
+            "ifr",
+            "vfr"
+          ]
+        },
+        {
+          "id": "met-045",
+          "question": "La foudre peut :",
+          "options": [
+            "Causer des dommages mineurs à sévères et perturber l'avionique",
+            "Toujours détruire l'avion",
+            "N'affecte pas la structure",
+            "Supprimer tout givrage"
+          ],
+          "correctIndex": 0,
+          "explanation": "Arc électrique, piqûres, instruments perturbés.",
+          "difficulty": 2,
+          "flightRules": [
+            "ifr",
+            "vfr"
+          ]
+        },
+        {
+          "id": "met-046",
+          "question": "Un squall line correspond à :",
+          "options": [
+            "Ligne d'orage violente précédant souvent un front froid",
+            "Chaîne de stratocumulus",
+            "Brume côtière",
+            "Jet de basse couche"
+          ],
+          "correctIndex": 0,
+          "explanation": "Ligne de grains avec orages forts et rafales.",
+          "difficulty": 2,
+          "flightRules": [
+            "ifr",
+            "vfr"
+          ]
+        },
+        {
+          "id": "met-047",
+          "question": "Le phénomène 'gust front' est :",
+          "options": [
+            "L'arc de rafales froides en avant d'un orage",
+            "Le cœur chaud d'une dépression",
+            "Une brise de vallée nocturne",
+            "Le cœur du jet stream"
+          ],
+          "correctIndex": 0,
+          "explanation": "Front de rafales à l'avant du système convectif.",
+          "difficulty": 3,
+          "flightRules": [
+            "ifr",
+            "vfr"
+          ]
+        },
+        {
+          "id": "met-048",
+          "question": "La bruine (DZ) provient typiquement :",
+          "options": [
+            "Des stratus",
+            "Des cumulus congestus",
+            "Des cirrus",
+            "Des altocumulus lenticularis"
+          ],
+          "correctIndex": 0,
+          "explanation": "Gouttes < 0.5 mm issues de nuages stratiformes bas.",
+          "difficulty": 1,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-049",
+          "question": "La grêle (GR) est associée à :",
+          "options": [
+            "Cumulonimbus puissants",
+            "Altostratus",
+            "Stratus",
+            "Nimbostratus faible"
+          ],
+          "correctIndex": 0,
+          "explanation": "Courants ascendants puissants dans CB.",
+          "difficulty": 1,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-050",
+          "question": "La pluie verglaçante (FZRA) entraîne :",
+          "options": [
+            "Givrage transparent sévère",
+            "Givrage blanc léger",
+            "Aucun givrage",
+            "Turbulence seulement"
+          ],
+          "correctIndex": 0,
+          "explanation": "Gouttes surfondues ⇒ verglas adhérent.",
+          "difficulty": 2,
+          "flightRules": [
+            "ifr",
+            "vfr"
+          ]
+        },
+        {
+          "id": "met-051",
+          "question": "METAR: 'CAVOK' signifie :",
+          "options": [
+            "Visibilité ≥ 10 km, pas de nuages < 5000 ft/MEH, pas de TCU/CB, pas de phénomènes",
+            "Ciel clair et vent nul",
+            "Aucun nuage",
+            "Pas de précipitation"
+          ],
+          "correctIndex": 0,
+          "explanation": "Définition CAVOK (selon État).",
+          "difficulty": 1,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-052",
+          "question": "Dans un TAF, 'PROB30' indique :",
+          "options": [
+            "Probabilité 30% d'occurrence de la sous-phrase",
+            "Pluie faible pendant 30 min",
+            "Amélioration certaine",
+            "Dégradation impossible"
+          ],
+          "correctIndex": 0,
+          "explanation": "PROB40/30 = probabilité.",
+          "difficulty": 2,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-053",
+          "question": "'BECMG 1214' dans un TAF veut dire :",
+          "options": [
+            "Changement graduel entre 12 et 14 UTC",
+            "Changement instantané à 12:14",
+            "Changement temporaire 12–14",
+            "Amélioration certaine à 14h"
+          ],
+          "correctIndex": 0,
+          "explanation": "BECMG = transition graduelle durant la période.",
+          "difficulty": 2,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-054",
+          "question": "Un AIRMET concerne :",
+          "options": [
+            "Phénomènes modérés significatifs pour les vols légers",
+            "Uniquement phénomènes sévères",
+            "Politique ATS",
+            "Avis aux navigateurs marins"
+          ],
+          "correctIndex": 0,
+          "explanation": "AIRMET = info météo en-route pour phénomènes modérés.",
+          "difficulty": 2,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-055",
+          "question": "SIGMET 'SEV TURB' signifie :",
+          "options": [
+            "Turbulence sévère",
+            "Turbulence modérée",
+            "Turbulence en dessous de 20 kt",
+            "Turbulence due au relief uniquement"
+          ],
+          "correctIndex": 0,
+          "explanation": "Severe turbulence = variations sévères d'assiette/Vz.",
+          "difficulty": 1,
+          "flightRules": [
+            "ifr",
+            "vfr"
+          ]
+        },
+        {
+          "id": "met-056",
+          "question": "SIGMET 'VA' fait référence à :",
+          "options": [
+            "Cendres volcaniques",
+            "Verglas",
+            "Vagues orographiques",
+            "Brouillard"
+          ],
+          "correctIndex": 0,
+          "explanation": "Volcanic Ash.",
+          "difficulty": 1,
+          "flightRules": [
+            "ifr",
+            "vfr"
+          ]
+        },
+        {
+          "id": "met-057",
+          "question": "En VFR de jour, un plafond 'BKN008' à un terrain contrôlé implique :",
+          "options": [
+            "VFR interdit sans SVFR/IFR",
+            "VFR autorisé sans restriction",
+            "VFR nuit autorisé",
+            "Aucun impact"
+          ],
+          "correctIndex": 0,
+          "explanation": "Plafond 800 ft limite fortement les opérations VFR.",
+          "difficulty": 2,
+          "flightRules": [
+            "vfr"
+          ]
+        },
+        {
+          "id": "met-058",
+          "question": "En approche IFR, un windshear annoncé exige :",
+          "options": [
+            "Préparation à une remise de gaz et ajustements de vitesse",
+            "Aucune action particulière",
+            "Descente plus lente uniquement",
+            "Virage serré"
+          ],
+          "correctIndex": 0,
+          "explanation": "Anticiper GA, vitesse additive selon SOP.",
+          "difficulty": 2,
+          "flightRules": [
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-059",
+          "question": "Le 'temps significatif' (significant weather) désigne :",
+          "options": [
+            "Phénomènes affectant la sécurité du vol",
+            "Uniquement orages",
+            "Uniquement givrage",
+            "Uniquement turbulence"
+          ],
+          "correctIndex": 0,
+          "explanation": "Inclut TS, ICE, TURB, VA, DS/SS, etc.",
+          "difficulty": 1,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-060",
+          "question": "Le Mistral en Méditerranée est :",
+          "options": [
+            "Vent de nord-ouest fort et froid",
+            "Vent chaud de sud-est",
+            "Brise de montagne nocturne",
+            "Vent catabatique tropical"
+          ],
+          "correctIndex": 0,
+          "explanation": "Mistral: NW froid, parfois violent.",
+          "difficulty": 2,
+          "flightRules": [
+            "vfr"
+          ]
+        },
+        {
+          "id": "met-061",
+          "question": "Le Foehn provoque :",
+          "options": [
+            "Réchauffement et assèchement sous le vent du relief",
+            "Refroidissement et humidification",
+            "Givrage",
+            "Toujours de la neige"
+          ],
+          "correctIndex": 0,
+          "explanation": "Air descendant se comprime et se réchauffe.",
+          "difficulty": 1,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-062",
+          "question": "Un 'Bora' est caractérisé par :",
+          "options": [
+            "Vent catabatique froid et violent en Adriatique",
+            "Vent saharien chaud",
+            "Vent diurne doux",
+            "Vent de mousson"
+          ],
+          "correctIndex": 0,
+          "explanation": "Bora: vent local froid fort.",
+          "difficulty": 3,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-063",
+          "question": "Erreur d'altimètre due à la température froide affecte surtout :",
+          "options": [
+            "Approches en terrain froid/élevé",
+            "Croisière au FL",
+            "Décollage par canicule",
+            "Vols supersoniques"
+          ],
+          "correctIndex": 0,
+          "explanation": "Danger de CFIT si non corrigée.",
+          "difficulty": 2,
+          "flightRules": [
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-064",
+          "question": "Avec QNH plus bas que prévu, l'avion est en réalité :",
+          "options": [
+            "Plus bas que l'altitude indiquée",
+            "Plus haut",
+            "À la même altitude",
+            "Ça dépend de la température"
+          ],
+          "correctIndex": 0,
+          "explanation": "From high to low... altitude vraie plus basse.",
+          "difficulty": 2,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-065",
+          "question": "La correction froid publiée (Cold Temp Corrections) s'applique :",
+          "options": [
+            "Aux altitudes minimales des segments d'approche/départ",
+            "Uniquement aux altitudes de croisière",
+            "Uniquement aux altitudes de transition",
+            "Jamais en Europe"
+          ],
+          "correctIndex": 0,
+          "explanation": "Procédures publiées pour segments critiques.",
+          "difficulty": 3,
+          "flightRules": [
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-066",
+          "question": "SPECI est :",
+          "options": [
+            "Un METAR spécial émis lors de changements significatifs",
+            "Un TAF abrégé",
+            "Un SIGMET local",
+            "Un AIRMET de terrain"
+          ],
+          "correctIndex": 0,
+          "explanation": "Observation spéciale quand conditions changent rapidement.",
+          "difficulty": 2,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-067",
+          "question": "Trend 'NOSIG' sur METAR signifie :",
+          "options": [
+            "Pas de changement significatif dans les 2h",
+            "Pas de phénomène météo présent",
+            "Pas de vent",
+            "CAVOK garanti"
+          ],
+          "correctIndex": 0,
+          "explanation": "Tendance courte durée.",
+          "difficulty": 1,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-068",
+          "question": "RVR 'M0500' signifie :",
+          "options": [
+            "RVR inférieur à 500 m",
+            "RVR égal à 500 m",
+            "RVR supérieur à 500 m",
+            "RVR autour de 50 m"
+          ],
+          "correctIndex": 0,
+          "explanation": "'M' = moins que.",
+          "difficulty": 2,
+          "flightRules": [
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-069",
+          "question": "Les étagements nuageux bas/moyen/haut sont environ :",
+          "options": [
+            "Bas < 6500 ft, moyen 6500–20000 ft, haut > 20000 ft",
+            "Bas < 3000 ft, moyen 3000–6000 ft, haut > 6000 ft",
+            "Bas < FL200, moyen FL200–FL300, haut > FL300",
+            "Uniquement dépendants de la saison"
+          ],
+          "correctIndex": 0,
+          "explanation": "Valeurs approximatives latitudes tempérées.",
+          "difficulty": 2,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-070",
+          "question": "Le nimbostratus (NS) donne typiquement :",
+          "options": [
+            "Pluie continue étendue",
+            "Averses courtes",
+            "Neige roulée",
+            "Grêle forte"
+          ],
+          "correctIndex": 0,
+          "explanation": "Stratiforme épais précipitant.",
+          "difficulty": 1,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-071",
+          "question": "Un towering cumulus (TCU) signale :",
+          "options": [
+            "Convection active, risque d'évolution orageuse",
+            "Stabilité forte",
+            "Ciel clair durable",
+            "Brouillard radiatif"
+          ],
+          "correctIndex": 0,
+          "explanation": "TCU = précurseur potentiel de CB.",
+          "difficulty": 1,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-072",
+          "question": "La visibilité dominante dans un METAR est :",
+          "options": [
+            "La valeur la plus fréquemment observée",
+            "La moyenne",
+            "La plus faible",
+            "La plus forte"
+          ],
+          "correctIndex": 0,
+          "explanation": "Définition 'dominante' selon l'OACI.",
+          "difficulty": 2,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-073",
+          "question": "'NSC' dans un METAR signifie :",
+          "options": [
+            "No significant cloud sous le MEH",
+            "No scattered cloud",
+            "Nuages stratiformes clairs",
+            "Nuages de convection nuls"
+          ],
+          "correctIndex": 0,
+          "explanation": "Pas de nuages significatifs sous la hauteur d'observation.",
+          "difficulty": 2,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-074",
+          "question": "'VV003' indique :",
+          "options": [
+            "Vertical visibility 300 ft (ciel obscurci)",
+            "Visibilité 300 m",
+            "Ciel clair 300 ft",
+            "Nuages à 300 ft"
+          ],
+          "correctIndex": 0,
+          "explanation": "VV = visibilité verticale estimée quand ciel obscurci.",
+          "difficulty": 3,
+          "flightRules": [
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-075",
+          "question": "En givrage modéré, un avion léger doit :",
+          "options": [
+            "Changer rapidement de niveau/route pour sortir de la zone",
+            "Maintenir la route et attendre la fin",
+            "Réduire la vitesse proche Vs",
+            "Couper le réchauffage pitot"
+          ],
+          "correctIndex": 0,
+          "explanation": "Sortir du givre: changer altitude (températures différentes) ou route.",
+          "difficulty": 2,
+          "flightRules": [
+            "ifr",
+            "vfr"
+          ]
+        },
+        {
+          "id": "met-076",
+          "question": "Le réchauffage carburateur se met :",
+          "options": [
+            "Dès baisse RPM/fluctuations suspectes en conditions propices",
+            "Jamais en vol",
+            "Uniquement au sol",
+            "Uniquement sous 0°C"
+          ],
+          "correctIndex": 0,
+          "explanation": "Conditions propices même au-dessus de 0°C.",
+          "difficulty": 1,
+          "flightRules": [
+            "vfr"
+          ]
+        },
+        {
+          "id": "met-077",
+          "question": "Le givrage pitot provoque :",
+          "options": [
+            "Indication de vitesse erronée (souvent hausse puis chute) et ALT/VSI faussées si statique affecté",
+            "Aucun effet",
+            "Perte de puissance moteur",
+            "Feu de cabine"
+          ],
+          "correctIndex": 0,
+          "explanation": "Tube pitot/statique obstrué => erreurs IAS/ALT/VSI.",
+          "difficulty": 2,
+          "flightRules": [
+            "ifr",
+            "vfr"
+          ]
+        },
+        {
+          "id": "met-078",
+          "question": "Sous CB, le 'hail shaft' :",
+          "options": [
+            "Peut projeter de la grêle loin du noyau",
+            "N'existe pas",
+            "Attire la foudre",
+            "Augmente la RVR"
+          ],
+          "correctIndex": 0,
+          "explanation": "Chute de grêle expulsée par rafales.",
+          "difficulty": 3,
+          "flightRules": [
+            "ifr",
+            "vfr"
+          ]
+        },
+        {
+          "id": "met-079",
+          "question": "Echo radar fort en bande convective signifie :",
+          "options": [
+            "Hydrométéores denses, forte réflectivité ⇒ orage/averse intense",
+            "Zone claire",
+            "Pas de pluie",
+            "Brume"
+          ],
+          "correctIndex": 0,
+          "explanation": "Forte réflectivité = cellules actives.",
+          "difficulty": 2,
+          "flightRules": [
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-080",
+          "question": "Voler sous l'enclume d'un CB :",
+          "options": [
+            "Est dangereux (grêle/turbulence) même sans pluie visible",
+            "Est sûr si pas d'éclair",
+            "Est recommandé pour gagner du temps",
+            "Évite le givrage"
+          ],
+          "correctIndex": 0,
+          "explanation": "Enclume peut projeter grêle loin de la cellule.",
+          "difficulty": 2,
+          "flightRules": [
+            "ifr",
+            "vfr"
+          ]
+        },
+        {
+          "id": "met-081",
+          "question": "Brouillard d'advection se produit quand :",
+          "options": [
+            "Air humide doux passe sur surface plus froide",
+            "Refroidissement nocturne par rayonnement",
+            "Soulèvement orographique",
+            "Subsidence"
+          ],
+          "correctIndex": 0,
+          "explanation": "Advection warm-over-cold.",
+          "difficulty": 2,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-082",
+          "question": "Brouillard d'évaporation (steam fog) :",
+          "options": [
+            "Air froid sur eau plus chaude provoquant évaporation et saturation",
+            "Air chaud sur sol froid",
+            "Radiatif",
+            "Neige vaporisée"
+          ],
+          "correctIndex": 0,
+          "explanation": "Vapeur se condense en air froid.",
+          "difficulty": 3,
+          "flightRules": [
+            "vfr"
+          ]
+        },
+        {
+          "id": "met-083",
+          "question": "'Mist' (BR) vs 'Fog' (FG) se distingu(ent) par :",
+          "options": [
+            "Visibilité: BR = 1–5 km, FG < 1 km",
+            "Température",
+            "Type de particules",
+            "Présence de nuages"
+          ],
+          "correctIndex": 0,
+          "explanation": "Seuil de 1000 m.",
+          "difficulty": 1,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-084",
+          "question": "Sous le vent d'un massif en onde forte, on attend :",
+          "options": [
+            "Rafales descendantes et rotor sévère en basse couche",
+            "Air laminaire lisse partout",
+            "CAVOK garanti",
+            "Givrage fort uniquement"
+          ],
+          "correctIndex": 0,
+          "explanation": "Zones de rotor dangereuses sous la couche d'onde.",
+          "difficulty": 2,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-085",
+          "question": "Signalement PIREP de 'SEV TURB' implique :",
+          "options": [
+            "Manoeuvrabilité sérieusement affectée, perte de contrôle possible",
+            "Confort légèrement dégradé",
+            "Aucun changement de niveau",
+            "Vol IMC obligatoire"
+          ],
+          "correctIndex": 0,
+          "explanation": "Définition turbulence sévère.",
+          "difficulty": 2,
+          "flightRules": [
+            "ifr",
+            "vfr"
+          ]
+        },
+        {
+          "id": "met-086",
+          "question": "MEF/MEA et onde: meilleure stratégie :",
+          "options": [
+            "S'écarter du relief, choisir niveaux stables, éviter sous-vent",
+            "Rester collé au relief",
+            "Descendre sous MSA",
+            "Ignorer SIGMET"
+          ],
+          "correctIndex": 0,
+          "explanation": "Gestion du risque orographique.",
+          "difficulty": 2,
+          "flightRules": [
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-087",
+          "question": "Pluie forte réduit :",
+          "options": [
+            "La visibilité (surtout nuit), augmente taux d'approche de vitre d'eau",
+            "Toujours la turbulence",
+            "Le cisaillement",
+            "Les effets de vent"
+          ],
+          "correctIndex": 0,
+          "explanation": "Scattering et voile aqueux.",
+          "difficulty": 1,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-088",
+          "question": "Neige roulée (GS) vs grêle (GR) :",
+          "options": [
+            "GS < 5 mm, GR ≥ 5 mm",
+            "GS ≥ 5 mm, GR < 5 mm",
+            "Identiques",
+            "GR ne tombe que l'été"
+          ],
+          "correctIndex": 0,
+          "explanation": "Codage METAR.",
+          "difficulty": 2,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-089",
+          "question": "Sable/poussière en suspension (DU/SA) :",
+          "options": [
+            "Réduit fortement la visibilité et encrasse filtres",
+            "Améliore la portance",
+            "Réduit le cisaillement",
+            "Aucun impact"
+          ],
+          "correctIndex": 0,
+          "explanation": "Risques moteurs/visibilité.",
+          "difficulty": 2,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-090",
+          "question": "Les gouttes surfondues de grande taille (SLD) sont dangereuses car :",
+          "options": [
+            "Elles débordent vers l'arrière et givrent au-delà des zones protégées",
+            "Elles n'adhèrent pas",
+            "Elles n'existent pas en dessous de 0°C",
+            "Elles provoquent du givre blanc uniquement"
+          ],
+          "correctIndex": 0,
+          "explanation": "SLD étalent le givre derrière les bords protégés.",
+          "difficulty": 3,
+          "flightRules": [
+            "ifr",
+            "vfr"
+          ]
+        },
+        {
+          "id": "met-091",
+          "question": "Le niveau de congélation (freezing level) est :",
+          "options": [
+            "L'altitude où T=0°C",
+            "L'altitude de saturation",
+            "Le niveau de l'isotherme -10°C",
+            "La tropopause locale"
+          ],
+          "correctIndex": 0,
+          "explanation": "Définition opérationnelle.",
+          "difficulty": 1,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-092",
+          "question": "Facteur de rafale (gust factor) est :",
+          "options": [
+            "Différence entre rafale max et vent moyen",
+            "Somme vent moyen + rafale",
+            "Rafale max seule",
+            "Écart de direction du vent"
+          ],
+          "correctIndex": 0,
+          "explanation": "GF = GustMax - Mean.",
+          "difficulty": 2,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-093",
+          "question": "Préfixes d'intensité METAR: '-', aucun, '+' signifient :",
+          "options": [
+            "Faible, modéré, fort",
+            "Fort, faible, modéré",
+            "Modéré, fort, faible",
+            "Faible, fort, extrême"
+          ],
+          "correctIndex": 0,
+          "explanation": "Codage OACI.",
+          "difficulty": 1,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-094",
+          "question": "Un TAF 'TAF 1212/1312' est valide :",
+          "options": [
+            "Du 12 à 12h UTC au 13 à 12h UTC",
+            "Du 12 à 00h au 13 à 12h",
+            "Pendant 6h",
+            "Uniquement le 12 de 12 à 13h"
+          ],
+          "correctIndex": 0,
+          "explanation": "Intervalle début/fin.",
+          "difficulty": 2,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-095",
+          "question": "Un front stationnaire :",
+          "options": [
+            "Se déplace peu, temps persistant",
+            "Se déplace rapidement",
+            "Toujours orageux",
+            "Sans nuages"
+          ],
+          "correctIndex": 0,
+          "explanation": "Faible déplacement ⇒ conditions durables.",
+          "difficulty": 1,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-096",
+          "question": "Dans le secteur chaud d'une dépression, on observe souvent :",
+          "options": [
+            "Stratocumulus, visibilité réduite, bruine",
+            "CB fréquents",
+            "Ciel clair durable",
+            "Vent nul"
+          ],
+          "correctIndex": 0,
+          "explanation": "Air chaud humide stratiforme.",
+          "difficulty": 2,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-097",
+          "question": "Un col de montagne canalise le vent par effet :",
+          "options": [
+            "Venturi (accélération)",
+            "Coriolis",
+            "Foehn",
+            "Bora"
+          ],
+          "correctIndex": 0,
+          "explanation": "Rétrécissement ⇒ accélération.",
+          "difficulty": 1,
+          "flightRules": [
+            "vfr"
+          ]
+        },
+        {
+          "id": "met-098",
+          "question": "Vents de vallée typiques :",
+          "options": [
+            "Brise montante de jour, descendante de nuit",
+            "Descendante de jour, montante de nuit",
+            "Constante 24/7",
+            "Sans lien avec l'ensoleillement"
+          ],
+          "correctIndex": 0,
+          "explanation": "Cycle diurne classique.",
+          "difficulty": 1,
+          "flightRules": [
+            "vfr"
+          ]
+        },
+        {
+          "id": "met-099",
+          "question": "Advection d'air froid sur une région entraîne :",
+          "options": [
+            "Baisse des T, parfois averses instables sur mer chaude",
+            "Hausse uniforme des T",
+            "Pas d'effet",
+            "Toujours brouillard"
+          ],
+          "correctIndex": 0,
+          "explanation": "Air froid sur substrat chaud = instabilité.",
+          "difficulty": 2,
+          "flightRules": [
+            "vfr",
+            "ifr"
+          ]
+        },
+        {
+          "id": "met-100",
+          "question": "En stratiforme, la 'bright band' radar correspond à :",
+          "options": [
+            "Zone de fusion neige/pluie augmentant la réflectivité",
+            "Zone sans hydrométéores",
+            "CB capillatus",
+            "Grêle uniquement"
+          ],
+          "correctIndex": 0,
+          "explanation": "Fonction de la couche 0°C.",
+          "difficulty": 3,
+          "flightRules": [
+            "ifr",
+            "vfr"
+          ]
+        }
+      ]
+    },
+    "060 General Navigation": {
+      "name": "060 Navigation Générale",
+      "description": "Cartes, temps, vitesse, cap, dérive, estime",
+      "questions": []
+    },
+    "060 Radio Navigation": {
+      "name": "060 Radiocommunications et Radionavigation",
+      "description": "VOR, NDB, DME, ILS, GNSS, RNAV",
+      "questions": []
+    },
+    "070 Operational Procedures": {
+      "name": "070 Procédures Opérationnelles",
+      "description": "Procédures normales, anormales, urgences",
+      "questions": []
+    },
+    "080 Principles of Flight": {
+      "name": "080 Principes de Vol",
+      "description": "Aérodynamique subsonique, stabilité, performance",
+      "questions": []
+    },
+    "090 Communications": {
+      "name": "090 Communications",
+      "description": "R/T VFR et IFR, procédures, phraséologie",
+      "questions": []
+    }
+  }
+}
